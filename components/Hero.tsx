@@ -25,7 +25,7 @@ export default async function Hero() {
             Stay Healthy the Natural Way
           </h1>
           <p className="text-base mb-5">
-            Recieve our weekly email that makes complex head topics simple.
+            Recieve our weekly email that makes complex health topics simple.
             Expert health advice, guides and exclusive offers all for FREE.
           </p>
           <Newsletter />
