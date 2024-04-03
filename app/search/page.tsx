@@ -5,7 +5,7 @@ import { client } from "@/lib/sanity";
 
 export const revalidate = 30;
 
-export async function getData() {
+async function getData() {
   const query = `*[_type == 'post'] | order(_createdAt desc) {
     "id": _id,
     title,
