@@ -28,7 +28,7 @@ async function getSinglePost(slug: string) {
   return data;
 }
 
-export default async function singlePost({
+export default async function showPost({
   params,
 }: {
   params: { slug: string };
