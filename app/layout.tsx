@@ -6,9 +6,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "NatureAid",
+  title: {
+    default: "NatureAid: Everything related to health and more",
+    template: "%s - NatureAid",
+  },
   description:
-    "Get Advice from Ayurvedic and Naturopathic Experts and Live a medicine free life",
+    "We bring ancient ayurvedic and naturopathic knowledge in the palm of your hand",
 };
 
 export default function RootLayout({
