@@ -46,7 +46,7 @@ export default async function showPost({
               {post.category.title}
             </Link>
             <h1 className="font-bold text-xl md:text-4xl">{post.title}</h1>
-            <h6 className="">{post.shortDescription}</h6>
+            {/*<h6 className="">{post.shortDescription}</h6>*/}
           </div>
           <div className="my-2 md:my-6 md:ml-auto">
             <p>Written by {post.author}</p>
