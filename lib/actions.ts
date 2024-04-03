@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { client } from "./sanity";
 
 export async function getFeatured() {
@@ -28,3 +29,23 @@ export async function getCategories() {
 
   return data;
 }
+
+export const getSinglePost = cache(async (slug: string) => {
+  const query = `
+        *[_type == 'post' && slug.current == '${slug}'] {
+          title,
+          "currentSlug": slug.current,
+          shortDescription,
+          category->{
+            title,
+              "slug": slug.current
+            },
+          "author": author->name,
+          content,
+          titleImage,
+        }[0]
+    `;
+
+  const data = await client.fetch(query);
+  return data;
+});

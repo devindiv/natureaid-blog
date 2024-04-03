@@ -1,39 +1,39 @@
 import { RichTextComponents } from "@/components/RichTextComponent";
 import Container from "@/components/ui/container";
+import { getSinglePost } from "@/lib/actions";
 import { singlePost } from "@/lib/interface";
-import { client, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const revalidate = 30;
+export const revalidate = 60;
 
-async function getSinglePost(slug: string) {
-  const query = `
-        *[_type == 'post' && slug.current == '${slug}'] {
-          title,
-          "currentSlug": slug.current,
-          shortDescription,
-          category->{
-            title,
-              "slug": slug.current
-            },
-          "author": author->name,
-          content,
-          titleImage,
-        }[0]
-    `;
-
-  const data = await client.fetch(query);
-  return data;
+interface singlePostProps {
+  params: { slug: string };
 }
 
-export default async function showPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post: singlePost = await getSinglePost(params.slug);
+export async function generateMetadata({
+  params: { slug },
+}: singlePostProps): Promise<Metadata> {
+  const postData: singlePost = await getSinglePost(slug);
+  return {
+    title: postData.title,
+    description: postData.shortDescription,
+    openGraph: {
+      images: [
+        {
+          url: urlFor(postData.titleImage).url(),
+        },
+      ],
+    },
+    metadataBase: new URL("https://natureaid.net"),
+  };
+}
+
+export default async function showPost({ params: { slug } }: singlePostProps) {
+  const post: singlePost = await getSinglePost(slug);
   return (
     <div>
       <Container>
