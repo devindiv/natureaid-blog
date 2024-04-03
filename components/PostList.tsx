@@ -39,7 +39,7 @@ const PostList = ({ posts }: Props) => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-xs md:text-sm text-primary mt-4 mb-1 uppercase">
-                    {post.category}
+                    {post.category.title}
                   </p>
                   <h6 className="text-gray-700 font-bold text-base md:text-xl line-clamp-2">
                     {post.title}
