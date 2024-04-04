@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
+import { roboto } from "@/components/ui/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className={`${roboto.className} min-h-screen text-slate-800`}>
+          {children}
+        </main>
         <Toaster />
         <Footer />
         <Analytics />

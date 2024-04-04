@@ -32,16 +32,22 @@ export const RichTextComponents = {
   },
   block: {
     h1: ({ children }: any) => (
-      <h1 className="text-5xl py-5 font-bold">{children}</h1>
+      <h1 className="text-4xl md:text-5xl py-5.5 font-bold">{children}</h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className="text-4xl py-4 font-bold">{children}</h2>
+      <h2 className="text-3xl md:text-4xl py-4.5 font-bold">{children}</h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className="text-3xl py-3 font-bold">{children}</h3>
+      <h3 className="text-2xl md:text-3xl py-3.5 font-bold">{children}</h3>
     ),
     h4: ({ children }: any) => (
-      <h4 className="text-xl py-2 font-bold">{children}</h4>
+      <h4 className="text-xl md:text-2xl py-2.5 font-bold">{children}</h4>
+    ),
+    h5: ({ children }: any) => (
+      <h5 className="text-lg md:text-xl py-1.5 font-bold">{children}</h5>
+    ),
+    normal: ({ children }: any) => (
+      <p className="text-base py-0.5 md:text-lg">{children}</p>
     ),
     blockquote: ({ children }: any) => (
       <blockquote className="border-l-gray-500 border-l-4 pl-5 py-5 my-5">

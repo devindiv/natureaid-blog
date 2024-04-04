@@ -18,6 +18,23 @@ export async function getFeatured() {
 
   return data;
 }
+export async function getAllPosts() {
+  const query = `*[_type == 'post'] | order(_createdAt desc) {
+    title,
+      "currentSlug": slug.current,
+      "category": category->{
+        title,
+        "slug": slug.current,
+      },
+      content,
+      shortDescription,
+      titleImage,
+  }`;
+
+  const data = await client.fetch(query);
+
+  return data;
+}
 
 export async function getCategories() {
   const query = `*[_type == "category" && defined(parent) != true] | order(_createdAt asc) {
@@ -27,6 +44,26 @@ export async function getCategories() {
 
   const data = await client.fetch(query);
 
+  return data;
+}
+export async function getPopularPosts(slug: string) {
+  const query = `
+  *[_type == 'post' && slug.current != '${slug}'] | order(_createdAt desc) [0...4] {
+    title,
+    "currentSlug": slug.current,
+    "category": category->{
+      title,
+      "slug": slug.current,
+    },
+    excerpt,
+    "author": author->slug.current,
+    content,
+    shortDescription,
+    titleImage,
+  }
+    `;
+
+  const data = await client.fetch(query);
   return data;
 }
 
