@@ -7,13 +7,13 @@ export const RichTextComponents = {
   types: {
     image: ({ value }: any) => {
       return (
-        <div className="block h-64 md:h-72 my-2.5">
+        <div className="block max-w-[25rem] my-2.5 border-slate-900">
           <Image
             src={urlFor(value).url()}
             alt="Post Image"
             width={480}
             height={360}
-            className="object-cover h-full rounded-lg md:w-1/2"
+            className="object-cover w-full h-full rounded-lg"
           />
         </div>
       );
@@ -64,7 +64,7 @@ export const RichTextComponents = {
         <Link
           href={value.href}
           rel={rel}
-          className="underline decoration-slate-800 hover:decoration-orange-500"
+          className="text-base font-semibold text-primary"
         >
           {children}
         </Link>
