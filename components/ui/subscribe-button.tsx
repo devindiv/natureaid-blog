@@ -5,13 +5,13 @@ const SubscribeButton = () => {
   return (
     <Button
       variant="outline"
-      className="text-orange-500 hover:text-white flex gap-2"
+      className="text-orange-500 hover:text-white flex gap-2 ml-auto h-7 md:h-9"
     >
       <svg
         width="16"
         height="16"
         viewBox="0 0 16 16"
-        className="inline-block h-6 w-6"
+        className="inline-block h-4 w-4 md:h-6 md:w-6"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

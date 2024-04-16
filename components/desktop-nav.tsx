@@ -20,7 +20,7 @@ export default function DesktopNav({
   categories: categoryList[];
 }) {
   return (
-    <nav className="mt-1 space-x-3 lg:space-x-4 hidden md:flex items-center">
+    <nav className="mx-auto mt-1 space-x-3 lg:space-x-4 hidden md:flex items-center">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

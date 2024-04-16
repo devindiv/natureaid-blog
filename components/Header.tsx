@@ -6,6 +6,7 @@ import SubscribeButton from "./ui/subscribe-button";
 import DesktopNav from "./desktop-nav";
 import { categoryList } from "@/lib/interface";
 import { getCategories } from "@/lib/actions";
+import MobileNav from "./mobile-nav";
 
 const Header = async () => {
   const categories: categoryList[] = await getCategories();
@@ -24,6 +25,7 @@ const Header = async () => {
           </Link>
           <DesktopNav categories={categories} />
           <SubscribeButton />
+          <MobileNav categories={categories} />
         </div>
       </Container>
     </header>
