@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/studio", "/privacy"],
       },
     ],
-    sitemap: "https://natureaid.net/sitemap.xml",
+    sitemap: "https://natureaid.in/sitemap.xml",
   };
 }
