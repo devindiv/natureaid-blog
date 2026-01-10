@@ -113,6 +113,7 @@ export default defineType({
         {
           type: 'image',
         },
+        {type: 'table'},
       ],
     }),
     defineField({

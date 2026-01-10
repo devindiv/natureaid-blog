@@ -4,8 +4,9 @@ import category from './category'
 import post from './post'
 import twitter from './twitter'
 import parentChild from '../parentChild'
+import table from './table'
 
-export const schemaTypes = [post, author, category, twitter]
+export const schemaTypes = [post, author, category, twitter, table]
 
 export const structure: StructureResolver = (S, context) =>
   S.list()

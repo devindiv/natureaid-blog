@@ -21,6 +21,28 @@ export const RichTextComponents = {
     twitter: ({ value }: any) => {
       return <Tweet id={value.id} />;
     },
+    table: ({ value }: any) => {
+      return (
+        <div className="overflow-x-auto my-6">
+          <table className="w-full border border-collapse border-gray-300">
+            <tbody>
+              {value.rows?.map((row: any, rowIndex: number) => (
+                <tr key={rowIndex}>
+                  {row.cells?.map((cell: string, cellIndex: number) => (
+                    <td
+                      key={cellIndex}
+                      className="border border-gray-300 px-4 py-2 text-sm"
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
   list: {
     bullet: ({ children }: any) => (
