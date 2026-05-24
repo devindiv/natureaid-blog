@@ -6,7 +6,7 @@ import { createClient } from "@sanity/client";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "gu9sd1z1",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   token: process.env.SANITY_API_TOKEN,
   apiVersion: "2024-01-01",
