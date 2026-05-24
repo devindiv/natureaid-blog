@@ -1,49 +1,38 @@
 "use client";
-import { categoryList } from "@/lib/interface";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 
-export default function DesktopNav({
-  categories,
-}: {
-  categories: categoryList[];
-}) {
+import Link from "next/link";
+
+const navLinks = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Shop",
+    href: "/shop",
+  },
+  {
+    label: "Articles",
+    href: "/search",
+  },
+  {
+    label: "About",
+    href: "/about",
+  },
+];
+
+export default function DesktopNav() {
   return (
-    <nav className="mx-auto mt-1 space-x-3 lg:space-x-4 hidden md:flex items-center">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-sm font-semibold text-gray-800">
-              Topics
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="p-4 grid grid-cols-2 gap-2 w-[32rem]">
-                {categories.map((category, i) => (
-                  <li key={i}>
-                    <Link
-                      href={`/${category.slug}`}
-                      className="text-sm text-gray-600"
-                    >
-                      {category.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+    <nav className="hidden md:flex items-center gap-8">
+      {navLinks.map((item) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          className="text-sm text-[#1B2A22]/60 hover:text-[#2B8055] transition"
+        >
+          {item.label}
+        </Link>
+      ))}
     </nav>
   );
 }

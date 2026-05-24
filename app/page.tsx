@@ -1,21 +1,15 @@
-import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
 import Latest from "@/components/Latest";
-import CategoryCard from "@/components/categories-card";
-import { roboto } from "@/components/ui/fonts";
-import Image from "next/image";
-
-export const revalidate = 60;
+import Consultation from "@/components/Consultation";
+import TopicsSection from "@/components/TopicsSection";
 
 export default function Home() {
   return (
-    <main
-      className={`${roboto.className} flex min-h-screen flex-col items-center justify-between`}
-    >
+    <main className="overflow-hidden bg-[#F7F4ED] text-[#1A2820]">
       <Hero />
-      <CategoryCard />
-      <Featured />
+      <Consultation />
       <Latest />
+      <TopicsSection />
     </main>
   );
 }

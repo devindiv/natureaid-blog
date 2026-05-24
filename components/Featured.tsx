@@ -1,77 +1,44 @@
-import { client, urlFor } from "@/lib/sanity";
-import Container from "./ui/container";
-import { postList } from "@/lib/interface";
 import Link from "next/link";
-import Image from "next/image";
-import PostCard from "./ui/postCard";
+import Latest from "./Latest";
 
-export async function getData() {
-  const query = `*[_type == 'post' && featured == true] | order(_createdAt desc) [1...10] {
-    title,
-    "currentSlug": slug.current,
-    "category": category->{
-      title,
-      "slug": slug.current,
-    },
-    excerpt,
-    "author": author->slug.current,
-    content,
-    shortDescription,
-    titleImage,
-  }`;
-
-  const data = await client.fetch(query);
-
-  return data;
-}
-
-export default async function Featured() {
-  const data: postList[] = await getData();
-  const featuredPosts = data.slice(1);
-  const mainFeatured = data[0];
+export default function FeaturedSection() {
   return (
-    <section>
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-4">
-          <div>
-            <article>
-              <Link href={`/posts/${mainFeatured.currentSlug}`}>
-                <div
-                  className="aspect-auto overflow-hidden rounded-lg
-                max-h-96"
-                >
-                  <Image
-                    src={urlFor(mainFeatured.titleImage).url()}
-                    alt="featured Post"
-                    height={480}
-                    width={640}
-                    priority
-                    className="object-contain w-full h-full hover:scale-105 transition duration-300"
-                  />
-                </div>
-                <div className="break-words">
-                  <p className="text-xs md:text-sm text-primary mt-4 mb-1 uppercase">
-                    {mainFeatured.category.title}
-                  </p>
-                  <h4 className="mb-2 text-gray-700 font-bold text-base md:text-4xl line-clamp-2">
-                    {mainFeatured.title}
-                  </h4>
-                  <p className="mb-1 line-clamp-3 text-xs md:text-lg text-gray-500 mt-2">
-                    {mainFeatured.shortDescription}
-                  </p>
-                </div>
-              </Link>
-            </article>
-          </div>
-          <ul className="space-y-10">
-            {featuredPosts.slice(0, 3).map((featuredPost, index) => (
-              <li key={index}>
-                <PostCard post={featuredPost} />
-              </li>
-            ))}
-          </ul>
+    <section className="px-8 py-24 md:px-14 lg:px-20 lg:py-32">
+      <div className="mb-20 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-2xl">
+          <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#2E7A52]">
+            <span className="h-px w-7 bg-[#2E7A52]" />
+            Recent Writing
+          </p>
+
+          <h2 className="mt-6 font-serif text-[44px] font-light leading-[0.95] tracking-[-0.03em] text-[#1A2820] md:text-[64px]">
+            Editorial insights
+            <br />
+            for modern wellbeing.
+          </h2>
         </div>
-      </Container>
+
+        <Link
+          href="/search"
+          className="
+            self-start
+            border-b
+            border-[#1A2820]/15
+            pb-1
+            text-[11px]
+            uppercase
+            tracking-[0.18em]
+            text-[#1A2820]/50
+            transition
+            hover:border-[#2E7A52]
+            hover:text-[#2E7A52]
+          "
+        >
+          View all articles
+        </Link>
+      </div>
+
+      <Latest />
     </section>
   );
 }

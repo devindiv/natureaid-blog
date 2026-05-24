@@ -1,12 +1,22 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function SkeletonCard() {
+export function SkeletonArticleRow() {
   return (
-    <div className="flex flex-col space-y-3">
-      <Skeleton className="h-64 max-w-72 rounded-xl" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
+    <div className="py-8 border-b border-border">
+      <div className="space-y-3 max-w-3xl">
+        {/* Category */}
+        <Skeleton className="h-3 w-24" />
+
+        {/* Title */}
+        <Skeleton className="h-5 w-[90%]" />
+        <Skeleton className="h-5 w-[75%]" />
+
+        {/* Description */}
+        <Skeleton className="h-4 w-[95%]" />
+        <Skeleton className="h-4 w-[85%]" />
+
+        {/* Meta */}
+        <Skeleton className="h-3 w-32 mt-2" />
       </div>
     </div>
   );

@@ -1,67 +1,56 @@
-import { urlFor } from "@/lib/sanity";
-import { Button } from "./ui/button";
-import { roboto } from "./ui/fonts";
-import { Input } from "./ui/input";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { client, urlFor } from "@/lib/sanity";
 import { postList } from "@/lib/interface";
-import { getFeatured } from "@/lib/actions";
-import Newsletter from "./newsletter";
+
+async function getFeaturedPost(): Promise<postList | null> {
+  const query = `*[_type == 'post' && featured == true][0] {
+    title, "currentSlug": slug.current,
+    "category": category->{ title, "slug": slug.current },
+    shortDescription, titleImage
+  }`;
+  return client.fetch(query);
+}
 
 export default async function Hero() {
-  const data: postList[] = await getFeatured();
-  const featuredPost = data[0];
+  const post = await getFeaturedPost();
+
   return (
-    <div
-      className={`${roboto.className} flex flex-col bg-gray-50 md:flex-row w-full`}
-    >
-      <div
-        className="grow flex flex-col items-center justify-center gap-4
-        bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500
-        md:rounded-lg text-gray-200 p-10"
-      >
-        <div className="max-w-[700px]">
-          <h1 className="font-black text-4xl mb-2">
-            Stay Healthy the Natural Way
-          </h1>
-          <p className="text-base mb-5">
-            Recieve our weekly email that makes complex health topics simple.
-            Expert health advice, guides and exclusive offers all for FREE.
+    <section className="border-b border-border py-10 px-6">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#2E7A52] mb-3">
+            {post?.category?.title ?? "Featured"} · Featured
           </p>
-          <Newsletter />
+          <h1 className="font-serif text-[32px] md:text-[38px] font-semibold leading-[1.15] tracking-tight text-foreground mb-4">
+            {post?.title ?? "Preventative Wellness & the Ayurvedic Path"}
+          </h1>
+          {post?.shortDescription && (
+            <p className="text-base leading-[1.75] text-muted-foreground mb-5">
+              {post.shortDescription}
+            </p>
+          )}
+          <Link
+            href={post ? `/posts/${post.currentSlug}` : "/search"}
+            className="text-[11px] font-semibold tracking-[0.12em] uppercase border-b border-[#2E7A52] text-[#2E7A52] pb-0.5 hover:opacity-70 transition"
+          >
+            Read article →
+          </Link>
         </div>
-      </div>
 
-      {/* Featured Card */}
-
-      <div className="max-w-[470px]">
-        <Link
-          href={`/posts/${featuredPost.currentSlug}`}
-          className="flex flex-col p-5"
-        >
-          <div className="aspect-auto overflow-hidden rounded-lg h-full max-h-64">
+        {post?.titleImage && (
+          <div className="aspect-[4/3] overflow-hidden rounded-sm">
             <Image
-              src={urlFor(featuredPost.titleImage).url()}
-              alt="featured Post"
-              height={480}
-              width={640}
+              src={urlFor(post.titleImage).width(800).url()}
+              alt={post.title}
+              width={800}
+              height={600}
+              className="w-full h-full object-cover"
               priority
-              className="object-cover w-full h-full hover:scale-105 transition duration-300"
             />
           </div>
-          <div className="flex flex-col justify-between">
-            <p className="text-xs md:text-sm text-primary mt-4 mb-1 uppercase">
-              {featuredPost.category.title}
-            </p>
-            <p className="text-gray-700 font-bold text-base md:text-lg line-clamp-2">
-              {featuredPost.title}
-            </p>
-            <p className="line-clamp-3 text-xs md:text-sm text-gray-500 mt-2">
-              {featuredPost.shortDescription}
-            </p>
-          </div>
-        </Link>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

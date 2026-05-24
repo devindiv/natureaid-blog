@@ -38,14 +38,14 @@ export async function getAllPosts() {
 
 export async function getCategories() {
   const query = `*[_type == "category" && defined(parent) != true] | order(_createdAt asc) {
-      title,
-        "slug": slug.current,
-    }`;
+    title,
+    "slug": slug.current,
+  }`;
 
   const data = await client.fetch(query);
-
   return data;
 }
+
 export async function getPopularPosts(slug: string) {
   const query = `
   *[_type == 'post' && slug.current != '${slug}'] | order(_createdAt desc) [0...4] {

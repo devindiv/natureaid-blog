@@ -1,67 +1,73 @@
 "use client";
 
 import { postList } from "@/lib/interface";
-import { urlFor } from "@/lib/sanity";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Button } from "./ui/button";
 
 type Props = {
   posts: postList[];
 };
 
 const PostList = ({ posts }: Props) => {
-  const articlesShown = 6;
-  const [loadMore, setLoadMore] = useState(articlesShown);
-  const showMoreArticles = () => {
-    setLoadMore(loadMore + articlesShown / 2);
-  };
+  const pageSize = 12;
+  const [visible, setVisible] = useState(pageSize);
+
+  const showMore = () => setVisible((v) => v + pageSize);
+
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10">
-        {posts.slice(0, loadMore).map((post, i) => (
-          <article key={i} className="md:mb-10">
-            <Link href={`/posts/${post.currentSlug}`}>
-              <div className="flex flex-col break-words">
-                <div
-                  className="aspect-auto overflow-hidden rounded-lg
-          max-w-md h-64"
-                >
-                  <Image
-                    src={urlFor(post.titleImage).url()}
-                    alt="featured Post"
-                    height={360}
-                    width={480}
-                    priority
-                    className="object-cover h-full hover:scale-105 transition duration-300"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p className="text-xs md:text-sm text-primary mt-4 mb-1 uppercase">
-                    {post.category.title}
-                  </p>
-                  <h6 className="text-gray-700 font-bold text-base md:text-xl line-clamp-2">
-                    {post.title}
-                  </h6>
-                  <p className="line-clamp-3 text-xs uppercase text-gray-600 mt-2">
-                    {post.author}
-                  </p>
-                </div>
+      {/* Two-column editorial index */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+        {posts.slice(0, visible).map((post) => (
+          <Link
+            key={post.currentSlug}
+            href={`/posts/${post.currentSlug}`}
+            className="group block"
+          >
+            <article className="space-y-3 pb-6 border-b border-border">
+              {/* Category */}
+              <div className="text-xs tracking-widest uppercase text-muted-foreground">
+                {post.category.title}
               </div>
-            </Link>
-          </article>
+
+              {/* Title */}
+              <h3 className="text-lg md:text-xl font-medium leading-snug group-hover:text-foreground transition-colors">
+                {post.title}
+              </h3>
+
+              {/* Description */}
+              {post.shortDescription && (
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                  {post.shortDescription}
+                </p>
+              )}
+
+              {/* Meta */}
+              <div className="text-xs text-muted-foreground">{post.author}</div>
+            </article>
+          </Link>
         ))}
       </div>
-      <div className="flex justify-center items-center mt-4">
-        {loadMore < posts?.length ? (
-          <Button type="button" onClick={showMoreArticles}>
-            Load More
-          </Button>
+
+      {/* Load More */}
+      <div className="flex justify-center mt-16">
+        {visible < posts.length ? (
+          <button
+            onClick={showMore}
+            className="
+              border border-border
+              px-6 py-3
+              text-xs tracking-widest uppercase
+              text-muted-foreground
+              hover:text-foreground
+              hover:bg-accent
+              transition
+            "
+          >
+            Load more
+          </button>
         ) : (
-          <Button type="button" disabled>
-            That's all!
-          </Button>
+          <div className="text-xs text-muted-foreground">End of archive</div>
         )}
       </div>
     </div>
