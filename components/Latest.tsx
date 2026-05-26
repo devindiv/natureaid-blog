@@ -12,6 +12,8 @@ export async function getData(): Promise<postList[]> {
   return client.fetch(query);
 }
 
+export const revalidate = 60;
+
 export default async function Latest() {
   const data: postList[] = await getData();
   if (!data || data.length === 0) return null;
