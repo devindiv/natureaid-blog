@@ -4,15 +4,15 @@ import { client, urlFor } from "@/lib/sanity";
 import { postList } from "@/lib/interface";
 
 async function getFeaturedPost(): Promise<postList | null> {
-  const query = `*[_type == 'post' && featured == true][0] {
-    title, "currentSlug": slug.current,
-    "category": category->{ title, "slug": slug.current },
-    shortDescription, titleImage
-  }`;
+  const query = `*[_type == 'post' && featured == true] | order(_createdAt desc) [0] {
+  title, "currentSlug": slug.current,
+  "category": category->{ title, "slug": slug.current },
+  shortDescription, titleImage
+}`;
   return client.fetch(query);
 }
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Hero() {
   const post = await getFeaturedPost();
@@ -43,9 +43,13 @@ export default async function Hero() {
         {post?.titleImage && (
           <div className="aspect-[4/3] overflow-hidden rounded-sm">
             <Image
-              src={urlFor(post.titleImage).width(800).url()}
+              src={urlFor(post.titleImage)
+                .width(600)
+                .height(600)
+                .quality(80)
+                .url()}
               alt={post.title}
-              width={800}
+              width={600}
               height={600}
               className="w-full h-full object-cover"
               priority
