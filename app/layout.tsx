@@ -45,14 +45,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(dmSans.variable, sourceSerif.variable)}
     >
-      <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8338403329746838"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-      </head>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8338403329746838"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
+
       <body
         suppressHydrationWarning
         className="font-sans bg-[#FAF8F2] text-[#1B2A22] antialiased overflow-x-hidden"
