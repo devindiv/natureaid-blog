@@ -68,7 +68,9 @@ export default function RootLayout({
         <Analytics />
 
         <Script
-          src="https://pl29586647.effectivecpmnetwork.com/00/9d/59/009d59c1c240b14fc6e75dad6c7eaeca.js"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8338403329746838"
+          crossOrigin="anonymous"
           strategy="afterInteractive"
         />
       </body>
