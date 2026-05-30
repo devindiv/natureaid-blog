@@ -6,9 +6,20 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/studio", "/privacy"],
+        disallow: ["/admin", "/studio"],
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/admin", "/studio"],
+      },
+      {
+        userAgent: "AdsBot-Google",
+        allow: "/",
+        disallow: ["/admin", "/studio"],
       },
     ],
     sitemap: "https://natureaid.in/sitemap.xml",
+    host: "https://natureaid.in",
   };
 }
