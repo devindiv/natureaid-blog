@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Search", href: "/search" },
-  { label: "About", href: "/about" },
 ];
 
 export default async function Header() {

@@ -14,7 +14,7 @@ const topics = [
 
 const pages = [
   { label: "About", href: "/about" },
-  { label: "Archive", href: "/search" },
+
   { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
 ];
@@ -70,9 +70,6 @@ export default async function Footer() {
 
         {/* Pages */}
         <div>
-          <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-foreground mb-5">
-            Company
-          </p>
           <ul className="space-y-3">
             {pages.map((p) => (
               <li key={p.href}>

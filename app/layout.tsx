@@ -8,8 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 import { ConsultationModalProvider } from "@/components/ConsultationModal";
 import { cn } from "@/lib/utils";
+import Script from "next/script";
 
-// UI font — labels, nav, buttons
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
@@ -17,7 +17,6 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-// Body & headline serif — long-form reading
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   weight: ["300", "400", "600"],
@@ -50,7 +49,6 @@ export default function RootLayout({
         suppressHydrationWarning
         className="font-sans bg-[#FAF8F2] text-[#1B2A22] antialiased overflow-x-hidden"
       >
-        {/* Subtle background glow */}
         <div
           className="pointer-events-none fixed inset-0 -z-50 overflow-hidden"
           aria-hidden="true"
@@ -68,6 +66,11 @@ export default function RootLayout({
         </ConsultationModalProvider>
 
         <Analytics />
+
+        <Script
+          src="https://pl29586647.effectivecpmnetwork.com/00/9d/59/009d59c1c240b14fc6e75dad6c7eaeca.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
